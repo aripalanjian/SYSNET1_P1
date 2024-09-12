@@ -1,0 +1,11 @@
+Your program must perform the following actions:
+1. Display a prompt on stdout.
+2. Accept a command as a string from the user (input string will terminate with a newline character). The
+program must terminate when the command exit is entered.
+3. Parse the input string into tokens, which are single words delimited by one or more spaces, tabs, or newline
+characters.
+4. Store the tokens in the fields of class Param.
+5. Print the contents of the fields using printParams() function, which is provided and explained below, but
+only when the shell is started with the debug option –Debug on the command line. Otherwise, the contents
+of the string will not be printed.
+6. Return back to step 1.
