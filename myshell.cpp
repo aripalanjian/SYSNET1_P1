@@ -6,6 +6,7 @@
 Shell::Shell(int argC, char **argV){
     this->argC = argC;
     this->argV = argV;
+    debug = false;
     checkOptions();
 }
 
