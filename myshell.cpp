@@ -17,19 +17,12 @@ void Shell::run(){
 
     cout << prompt;
     int count = getInput(tokens);
+    Param* params;
+
     while (true){
         
         exitCode = parser.parseTokens(count, tokens);
-        
-        if (debug){
-            // printParams();
-            cout << "Number of tokens: " << count << endl;
-            for (int i = 0; i < count; i++){
-                //for loop for debuging tokens
-                cout << i << ": " << tokens[i] << ", ";
-            }
-            cout << endl;
-        }
+        params = parser.getParams();
 
         if (exitCode == 0) {
             break;
@@ -37,8 +30,19 @@ void Shell::run(){
             //record error
             // break;
         }
+
+        if (debug){
+            params->printParams();
+            // cout << "Number of tokens: " << count << endl;
+            // for (int i = 0; i < count; i++){
+            //     //for loop for debuging tokens
+            //     cout << i << ": " << tokens[i] << ", ";
+            // }
+            // cout << endl;
+        }
         cout << "\n" << prompt;
         count = getInput(tokens);
+        params->resetParams();
     }
 
     for (int i = 0; i < count; i++){

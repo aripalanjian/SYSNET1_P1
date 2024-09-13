@@ -13,9 +13,11 @@
 //     + FullyQualifiedErrorId : CommandNotFoundException
 
 #include "param.hpp"
+#include <iostream>
+#include <string.h>
 
 Param::Param(){
-    inputRedirect = outputRedirect = nullptr;
+    inputRedirect = outputRedirect = NULL;
     this->background = 0;
 }
 
@@ -48,7 +50,7 @@ void Param::setOutputRedirect(char* output){
 }
 
 void Param::setBackground(int background){
-
+    this->background = background;
 }
 
 void Param::setArgumentCount(int count){
@@ -63,5 +65,39 @@ void Param::setArgumentVector(char** arguments){
 }
 
 void Param::printParams(){
+    using std::cout; using std::endl;
 
+    cout << "InputRedirect: ["
+        << ((inputRedirect != NULL) ? inputRedirect : "NULL");
+    cout << "]"
+        << endl
+        << "OutputRedirect: ["
+        << ((outputRedirect != NULL) ? outputRedirect : "NULL");
+    cout << "]"
+        << endl
+        << "Background: ["
+        << background
+        << "]"
+        << endl
+        << "ArgumentCount: ["
+        << argumentCount
+        << "]"
+        << endl;
+    for (int i = 0; i < argumentCount; i++){
+        cout << "ArgumentVector["
+        << i
+        << "]: ["
+        << argumentVector[i]
+        << "]"
+        << endl;
+    }
+}
+
+void Param::resetParams(){
+    inputRedirect = outputRedirect = NULL;
+    background = 0;
+    argumentCount = 0;
+    for (int i = 0; i < MAXARGS; i++){
+        argumentVector[i] = NULL;
+    }
 }

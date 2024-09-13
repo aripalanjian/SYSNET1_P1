@@ -23,6 +23,7 @@ public:
     void setArgumentCount(int count);
     void setArgumentVector(char** arguments);
     void printParams();
+    void resetParams();
 };
 
 #endif

@@ -26,19 +26,24 @@ int Parse::parseTokens(int count, char **tokens){
 
     for(int i = 0; i < count; i++){
         if(tokens[i][0] == '<'){
-            //need to account for > after inputRedirect
+            //need to account for > directly after inputRedirect
             if (strcmp(tokens[i], "<") == 0){
-                std::cout << "1)inputRedirect: " << tokens[i+1] << std::endl;
                 params->setInputRedirect(tokens[i+1]);
                 i++;
             } else {
-                std::cout << "2)inputRedirect: " << tokens[i]+1 << std::endl;
-                params->setInputRedirect(tokens[i]+1);
+                cout<< "Input Redirect: " << tokens[i]+1 << std::endl;
+                params->setInputRedirect((tokens[i]+1));
             }
         } else if (tokens[i][0] == '&' && i == count - 1){
             params->setBackground(1);
         } else if (tokens[i][0] == '>'){
             //outputRedirect
+            if (strcmp(tokens[i], ">") == 0){
+                params->setOutputRedirect(tokens[i+1]);
+                i++;
+            } else {
+                params->setOutputRedirect(tokens[i]+1);
+            }
         } else {
             argumentVector[argumentCount++] = tokens[i];
             //add tokens to array
@@ -50,21 +55,6 @@ int Parse::parseTokens(int count, char **tokens){
         params->setArgumentVector(argumentVector);
     }
     
-    // if () //else if (tokens[0] == "pwd"){
-    //     cout << fs.pwd() << endl;
-    // } else if (tokens[0] == "cd") {
-    //     cout << fs.cd(tokens[1]);
-    // } else if (tokens[0] == "touch") {
-    //     cout << fs.touch(tokens[1]);
-    // } else if (tokens[0] == "ls") {
-    //     cout << fs.ls();
-    // } else if (tokens[0] == "rm") {
-    //     cout << fs.rm(tokens[1]);
-    // } else if (tokens[0] == "mv") {
-    //     cout << fs.mv(tokens[1],tokens[2]);
-    // } else if (tokens[0] == "mkdir") {
-    //     cout << fs.mkdir(tokens[1]);
-    // }
     return 1;
 }
 
