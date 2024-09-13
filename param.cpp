@@ -14,7 +14,6 @@
 
 #include "param.hpp"
 #include <iostream>
-#include <string.h>
 
 Param::Param(){
     inputRedirect = outputRedirect = NULL;

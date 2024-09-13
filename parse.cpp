@@ -31,7 +31,6 @@ int Parse::parseTokens(int count, char **tokens){
                 params->setInputRedirect(tokens[i+1]);
                 i++;
             } else {
-                cout<< "Input Redirect: " << tokens[i]+1 << std::endl;
                 params->setInputRedirect((tokens[i]+1));
             }
         } else if (tokens[i][0] == '&' && i == count - 1){
