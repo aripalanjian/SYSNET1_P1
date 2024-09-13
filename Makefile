@@ -14,32 +14,3 @@ main.o: main.cpp myshell.cpp param.cpp parse.cpp
 .PHONY : clean
 clean: 
 	rm main $(objects)
-
-
-# CC= g++
-# DEBUG = -g
-# CXXFLAGS = $(DEBUG) -c -Wall -std=c++11
-# LDLIBS =
-
-
-# TARGET = main
-
-# SOURCES = \
-# main.cpp myshell.cpp parse.cpp param.cpp
-
-# OBJECTS = $(SOURCES:.cpp=.o)
-
-# $(TARGET): $(OBJECTS)
-# 	$(CC) -o $(TARGET) $(OBJECTS) $(LDLIBS)
-# 	./main
-
-# .cpp.o:
-# 	$(CC) $(CXXFLAGS) $< -o $@
-
-# .PHONY : all $(TARGET)
-
-# clean:
-# 	rm -f $(OBJECTS)
-
-# clobber:clean
-# 	rm -f $(TARGET)

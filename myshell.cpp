@@ -33,12 +33,6 @@ void Shell::run(){
 
         if (debug){
             params->printParams();
-            // cout << "Number of tokens: " << count << endl;
-            // for (int i = 0; i < count; i++){
-            //     //for loop for debuging tokens
-            //     cout << i << ": " << tokens[i] << ", ";
-            // }
-            // cout << endl;
         }
         cout << "\n" << prompt;
         count = getInput(tokens);
@@ -52,7 +46,8 @@ void Shell::run(){
 
 int Shell::getInput(char **arr){
     char *input, *temp;
-    std::cin.getline(input,1000);
+    input = new char;
+    std::cin.getline(input, 1000);
     std::stringstream ss(input);
 
     int i = 0;
@@ -62,6 +57,7 @@ int Shell::getInput(char **arr){
         arr[i++] = temp;
     }
 
+    delete input;
     return i;
 }
 
