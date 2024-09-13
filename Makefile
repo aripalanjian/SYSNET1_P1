@@ -1,4 +1,4 @@
-CFLAGS = -g -Wall -Wextra
+CFLAGS = -g -Wall
 CC = g++
 
 objects = main.o myshell.o param.o parse.o
