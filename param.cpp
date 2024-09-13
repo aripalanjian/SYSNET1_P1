@@ -1,9 +1,4 @@
-    // char *inputRedirect; /* file name or NULL */
-    // char *outputRedirect; /* file name or NULL */
-    // int background; /* either 0 (false) or 1 (true) */
-    // int argumentCount; /* number of tokens in argument vector */
-    // char *argumentVector[MAXARGS]; /* array of strings */
-
+//Example error message
 //     term : The term 'term' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was 
 // included, verify that the path is correct and try again.
 // At line:1 char:1
