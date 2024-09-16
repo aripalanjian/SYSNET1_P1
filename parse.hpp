@@ -5,6 +5,7 @@
 
 class Parse{
     Param *params;
+    char *errorLog;
 public:
     Parse();
     ~Parse();
@@ -12,6 +13,8 @@ public:
     Param* getParams();
     int exit();
     int abort();
+    char* getErrorLog();
+    void generateErrorMsg(const char* violator, const char* command);
 };
 
 #endif

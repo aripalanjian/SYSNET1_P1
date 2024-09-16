@@ -1,11 +1,10 @@
 #ifndef MYSHELL_HPP
 #define MYSHELL_HPP
 
-#include <sstream>
 #include "parse.hpp"
 
 class Shell{
-    std::string prompt = "$$$ ";
+    const char* prompt = "$$$ ";
     Parse parser = Parse();
     int argC;
     char ** argV;

@@ -28,8 +28,9 @@ void Shell::run(){
         if (exitCode == 0) {
             break;
         } else if (exitCode == -1){
+            cout << parser.getErrorLog() << endl;
             //record error
-            // break;
+            break;
         }
 
         if (debug){
@@ -49,13 +50,13 @@ int Shell::getInput(char **arr){
     char *input, *temp;
     input = new char;
     std::cin.getline(input, 1000);
-    std::stringstream ss(input);
+    const char * delim = " \t";
+    char* token = strtok(input, delim);
 
     int i = 0;
-    while (!ss.eof()){
-        temp = new char;
-        ss >> temp;
-        arr[i++] = temp;
+    while(token){
+        arr[i++] = strdup(token);
+        token = strtok(nullptr, delim);
     }
 
     delete input;

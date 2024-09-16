@@ -6,10 +6,12 @@ using std::cout;
 
 Parse::Parse(){
     params = new Param();
+    errorLog = new char;
 }
 
 Parse::~Parse(){
     delete params;
+    delete errorLog;
 }
 
 int Parse::parseTokens(int count, char **tokens){
@@ -17,12 +19,12 @@ int Parse::parseTokens(int count, char **tokens){
         std::cout << "exiting..."<< std::endl;
         return exit();
     } else if (count > 1 && strcmp(tokens[0],"exit") == 0){
-        std::cout << "Error: The term \'" << tokens[1] << "\' is not recognized as an option subsequent to exit." << std::endl;
+        generateErrorMsg(tokens[1], "exit");
         return abort();
     }
 
     int argumentCount = 0;
-    char *argumentVector[32];
+    char *argumentVector[MAXARGS];
 
     for(int i = 0; i < count; i++){
         if(tokens[i][0] == '<'){
@@ -57,8 +59,20 @@ int Parse::parseTokens(int count, char **tokens){
     return 1;
 }
 
+void Parse::generateErrorMsg(const char* violator, const char* command){
+    strcat(errorLog, "Error: The term \'");
+    strcat(errorLog, violator);
+    strcat(errorLog, "\' is not recognized as an option subsequent to ");
+    strcat(errorLog, command);
+    strcat(errorLog, ".");
+}
+
 Param* Parse::getParams(){
     return params;
+}
+
+char* Parse::getErrorLog(){
+    return errorLog;
 }
 
 int Parse::exit(){
