@@ -5,16 +5,16 @@
 
 class Parse{
     Param *params;
-    char *errorLog;
+    char errorLog[1000];
+    void generateErrorMsg(const char* violator, const char* command);
 public:
     Parse();
     ~Parse();
     int parseTokens(int count, char **tokens);
     Param* getParams();
+    char* getErrorLog();
     int exit();
     int abort();
-    char* getErrorLog();
-    void generateErrorMsg(const char* violator, const char* command);
 };
 
 #endif

@@ -6,12 +6,10 @@ using std::cout;
 
 Parse::Parse(){
     params = new Param();
-    errorLog = new char;
 }
 
 Parse::~Parse(){
     delete params;
-    delete errorLog;
 }
 
 int Parse::parseTokens(int count, char **tokens){

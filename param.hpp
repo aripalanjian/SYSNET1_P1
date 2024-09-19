@@ -12,6 +12,7 @@ class Param{
     char *argumentVector[MAXARGS]; /* array of strings */
 public:
     Param();
+    ~Param(){}
     char* getInputRedirect();
     char* getOutputRedirect();
     int getBackground();

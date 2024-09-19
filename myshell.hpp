@@ -5,13 +5,15 @@
 
 class Shell{
     const char* prompt = "$$$ ";
-    Parse parser = Parse();
+    Parse parser;
     int argC;
     char ** argV;
     bool debug;
     void checkOptions();
+    void checkParams(Param* params);
 public:
     Shell(int argC, char **argV);
+    ~Shell(){}
     void run();
     int getInput(char **arr);
 };
