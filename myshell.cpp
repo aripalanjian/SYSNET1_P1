@@ -26,7 +26,6 @@ void Shell::run(){
     int pid;
 
     while (true){
-        parser = Parse();
         exitCode = parser.parseTokens(count, tokens);
         params = parser.getParams();
 
@@ -35,33 +34,41 @@ void Shell::run(){
         } else if (exitCode == -1){
             cout << parser.getErrorLog() << endl;
             //record error
-            // break;
-        } //else {
+        } else if (!params->getBackground()){
             //call fork here
-        pid = fork();
-        if (pid == 0) {
-            std::cout << "Child Process\n";
-            // checkParams(params);
-            break;
-        } else {
-            wait(status); //change to waitpid so that new commands cannot be entered until child is done
-            std::cout << "Parent Process\n";
-            if (debug){
-                params->printParams();
+            pid = fork();
+            if (pid == 0) {
+                std::cout << "Child Process\n";
+                checkParams(params);
+                break;
+            } else {
+                wait(status); //change to waitpid so that new commands cannot be entered until child is done
+                std::cout << "Parent Process\n";
+                if (debug){
+                    params->printParams();
+                }
             }
-            cout << "\n" << prompt;
-            count = getInput(tokens);
-            params->resetParams();
+        } else {
+            pid = fork();
+            if (pid == 0) {
+                std::cout << "Child Process\n";
+                checkParams(params);
+                break;
+            } else {
+                std::cout << "Parent Process\n";
+                if (debug){
+                    params->printParams();
+                }
+            }
         }
-        //}
-    }
-    
-    if (pid != 0){
 
-        // for (int i = 0; i < count; i++){
-        //     delete tokens[i];
-        // }
+        cout << "\n" << prompt;
+        count = getInput(tokens);
+        params->resetParams();
     }
+
+    wait(status);
+    std::cout << "Children should be terminated..." << endl;
 }
 
 int Shell::getInput(char **arr){
@@ -77,7 +84,7 @@ int Shell::getInput(char **arr){
         token = strtok(nullptr, delim);
     }
 
-    delete input;
+    delete input, token;
     return i;
 }
 
@@ -100,50 +107,40 @@ void Shell::checkParams(Param* params){
     } else {
         option = NULL;
     }
-
+    const char* outputRedirect = params->getOutputRedirect();
+    const char* inputRedirect = params->getInputRedirect();
     if (strcmp(arguments[0], "ls") == 0){
-        execv("/bin/ls", option);
-        // for (unsigned i = 1; i < size; i++){
-        //     if (strcmp(arguments[i], "-l")){
-        //         if (params->getOutputRedirect() != NULL){
-        //             //write directory contents to file
-
-        //         } else {
-        //             //write directory contents to cout
-        //         }
-        //     }
-        // }
-    } else if (strcmp(arguments[0], "grep") == 0){
-        //write # of lines with given word to cout
-        for (unsigned i = 1; i < size; i++){
-            if (strcmp(arguments[i], "-i")){
-                //do something
-            }
+        if (outputRedirect != NULL){
+            freopen(outputRedirect, "w", stdout);
         }
+        execvp("/bin/ls", option);
+    } else if (strcmp(arguments[0], "grep") == 0){
+        //write lines with given word to cout
+        execvp(arguments[0], option);
     } else if (strcmp(arguments[0], "cat") == 0){
         // displays the source code of the program on the screen
-        if (params->getInputRedirect() != NULL){
-            if (params->getBackground() == 0){
-                //displays the source code of the program on the screen
-            } else {
-                // as above except the output will be displayed in the background causing
-                //     the prompt of the shell to be mixed with the output of the file
-            }
+        const char* file;
+        if (inputRedirect != NULL){
+            file = inputRedirect;
         } else {
-            if (params->getBackground() == 1){
-                //displays the content of the text file testfile.txt on the screen in the
-                    // background
+            file = NULL;
+            for(int i = 0; i < size - 1; i++){
+                if (option[i][0] != '-'){
+                    file = option[i];
+                }
             }
-        }
+        }        
+
+        freopen(file, "r", stdin);
+        execvp("/bin/cat", option);
         
     } else if (strcmp(arguments[0], "./slow") == 0){
-        if (params->getBackground()){
-            // execv()
+        execvp(arguments[0], option);
             // runs the program slow from the current working directory in the background
-        }
     } else {
         //Error message
     }
+    // exit(0);
 }
 
 int main(int argC, char **argV){

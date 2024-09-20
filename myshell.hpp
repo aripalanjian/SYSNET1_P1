@@ -5,7 +5,7 @@
 
 class Shell{
     const char* prompt = "$$$ ";
-    Parse parser;
+    Parse parser = Parse();
     int argC;
     char ** argV;
     bool debug;

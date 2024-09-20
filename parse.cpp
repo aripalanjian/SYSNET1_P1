@@ -13,11 +13,17 @@ Parse::~Parse(){
 }
 
 int Parse::parseTokens(int count, char **tokens){
+    memset(errorLog, 0, 1000);
     if (count == 1 && strcmp(tokens[0],"exit") == 0){
         std::cout << "exiting..."<< std::endl;
         return exit();
     } else if (count > 1 && strcmp(tokens[0],"exit") == 0){
-        generateErrorMsg(tokens[1], "exit");
+        generateOptionsErrorMsg(tokens[1], "exit");
+        return abort();
+    }
+
+    if (!checkCommands(tokens[0])){
+        generateErrorMsg(tokens[0]);
         return abort();
     }
 
@@ -33,7 +39,7 @@ int Parse::parseTokens(int count, char **tokens){
             } else {
                 params->setInputRedirect((tokens[i]+1));
             }
-        } else if (tokens[i][0] == '&' && i == count - 1){
+        } else if (tokens[i][0] == '&'){ // && i == count - 1){
             params->setBackground(1);
         } else if (tokens[i][0] == '>'){
             //outputRedirect
@@ -57,7 +63,25 @@ int Parse::parseTokens(int count, char **tokens){
     return 1;
 }
 
-void Parse::generateErrorMsg(const char* violator, const char* command){
+bool Parse::checkCommands(const char* command){
+    const char* commands[] = {"ls", "grep", "cat", "./slow"};
+    int size = sizeof(commands)/sizeof(char*);
+
+    for(int i = 0; i < size; i++){
+        if (strcmp(command, commands[i]) == 0)
+            return true;
+    }
+
+    return false;
+}
+
+void Parse::generateErrorMsg(const char* violator){
+    strcat(errorLog, "Error: The term \'");
+    strcat(errorLog, violator);
+    strcat(errorLog, "\' is not recognized as a command.");
+}
+
+void Parse::generateOptionsErrorMsg(const char* violator, const char* command){
     strcat(errorLog, "Error: The term \'");
     strcat(errorLog, violator);
     strcat(errorLog, "\' is not recognized as an option subsequent to ");
