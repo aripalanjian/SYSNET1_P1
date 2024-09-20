@@ -1,3 +1,10 @@
+/***************************************************************
+  Student Name: Ari Palanjian
+  File Name: parse.cpp
+  Project 1
+
+  Parse class member funtion definitions
+***************************************************************/
 #include "parse.hpp"
 #include <iostream>
 #include <string.h>
@@ -32,17 +39,15 @@ int Parse::parseTokens(int count, char **tokens){
 
     for(int i = 0; i < count; i++){
         if(tokens[i][0] == '<'){
-            //need to account for > directly after inputRedirect
             if (strcmp(tokens[i], "<") == 0){
                 params->setInputRedirect(tokens[i+1]);
                 i++;
             } else {
                 params->setInputRedirect((tokens[i]+1));
             }
-        } else if (tokens[i][0] == '&'){ // && i == count - 1){
+        } else if (tokens[i][0] == '&'){
             params->setBackground(1);
         } else if (tokens[i][0] == '>'){
-            //outputRedirect
             if (strcmp(tokens[i], ">") == 0){
                 params->setOutputRedirect(tokens[i+1]);
                 i++;
@@ -51,7 +56,6 @@ int Parse::parseTokens(int count, char **tokens){
             }
         } else {
             argumentVector[argumentCount++] = tokens[i];
-            //add tokens to array
         }
     }
 

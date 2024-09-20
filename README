@@ -1,8 +1,12 @@
 About The Project
-    At this state this project is a precursor to build a simple production shell.
-    The program currently tokenizes a series of strings entered in the command line after initializing the program.
+    This project simulates a simple production shell.
+    The program tokenizes a series of strings entered in the command line, the tokens are then parsed
+        and stored in a object. If the arguments in the param object are recognized a combination of
+         a command and options or just a command the processes will execute the statement.
 
 Steps to run:
     1) In the project directory run the command make
     2) In the command line enter ./main to start the shell
     3) To use debug mode enter ./main -Debug in the command line
+
+Running the command "make clean" will remove the executables, objects, and any .txt files in the directory.

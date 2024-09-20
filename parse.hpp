@@ -1,3 +1,11 @@
+/***************************************************************
+  Student Name: Ari Palanjian
+  File Name: parse.hpp
+  Project 1
+
+  Parse class definition
+    Take tokens and distribute to appropriate param fields
+***************************************************************/
 #ifndef PARSE_HPP
 #define PARSE_HPP
 

@@ -19,4 +19,4 @@ slow.o: slow.c
 clean: 
 	rm myshell $(objects)
 	rm slow slow.o
-	rm testfile.txt
+	rm *.txt

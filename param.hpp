@@ -1,9 +1,14 @@
+/***************************************************************
+  Student Name: Ari Palanjian
+  File Name: param.hpp
+  Project 1
+
+  Param class definition
+    Class to hold input data
+***************************************************************/
 #ifndef PARAM_HPP
 #define PARAM_HPP
-/* don't test program with more than this many tokens for input */
 #define MAXARGS 32
-/* class to hold input data */
-/* feel free to add missing constructor, destructor, and getter/setter functions */
 class Param{
     char *inputRedirect; /* file name or NULL */
     char *outputRedirect; /* file name or NULL */

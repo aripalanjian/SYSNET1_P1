@@ -1,12 +1,10 @@
-//Example error message
-//     term : The term 'term' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was 
-// included, verify that the path is correct and try again.
-// At line:1 char:1
-// + rust
-// + ~~~~
-//     + CategoryInfo          : ObjectNotFound: (rust:String) [], CommandNotFoundException
-//     + FullyQualifiedErrorId : CommandNotFoundException
+/***************************************************************
+  Student Name: Ari Palanjian
+  File Name: param.cpp
+  Project 1
 
+  Param class member funtion definitions
+***************************************************************/
 #include "param.hpp"
 #include <iostream>
 
@@ -52,7 +50,6 @@ void Param::setArgumentCount(int count){
 }
 
 void Param::setArgumentVector(char** arguments){
-    // this->argumentVector = arguments;
     for (int i = 0; i < argumentCount; i++){
         this->argumentVector[i] = arguments[i];
     }

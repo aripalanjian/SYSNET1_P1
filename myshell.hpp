@@ -1,3 +1,13 @@
+/***************************************************************
+  Student Name: Ari Palanjian
+  File Name: myshell.hpp
+  Project 1
+
+  Shell class definition
+    Simulates a production shell
+    Implements tokenizer to the be parsed
+    Run typical shell commands
+***************************************************************/
 #ifndef MYSHELL_HPP
 #define MYSHELL_HPP
 

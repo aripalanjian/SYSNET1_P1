@@ -1,3 +1,10 @@
+/***************************************************************
+  Student Name: Ari Palanjian
+  File Name: myshell.cpp
+  Project 1
+
+  Shell class member funtion definitions
+***************************************************************/
 #include "myshell.hpp"
 #define MAXARGS 32
 #include <iostream>
@@ -33,9 +40,7 @@ void Shell::run(){
             break;
         } else if (exitCode == -1){
             cout << parser.getErrorLog() << endl;
-            //record error
         } else if (!params->getBackground()){
-            //call fork here
             pid = fork();
             if (pid == 0) {
                 std::cout << "Child Process\n";
@@ -98,7 +103,6 @@ void Shell::checkOptions(){
 }
 
 void Shell::checkParams(Param* params){
-    // {"ls", "grep", "cat", "./slow"}
     unsigned size = params->getArgumentCount();
     char** arguments = params->getArgumentVector();
     char* const* option;
@@ -137,10 +141,7 @@ void Shell::checkParams(Param* params){
     } else if (strcmp(arguments[0], "./slow") == 0){
         execvp(arguments[0], option);
             // runs the program slow from the current working directory in the background
-    } else {
-        //Error message
     }
-    // exit(0);
 }
 
 int main(int argC, char **argV){
