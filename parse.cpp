@@ -22,10 +22,10 @@ Parse::~Parse(){
 int Parse::parseTokens(int count, char **tokens){
     memset(errorLog, 0, 1000);
     if (count == 1 && strcmp(tokens[0],"exit") == 0){
-        std::cout << "exiting..."<< std::endl;
         return exit();
     } else if (count > 1 && strcmp(tokens[0],"exit") == 0){
         generateOptionsErrorMsg(tokens[1], "exit");
+        std::cout << "Abort"<< std::endl;
         return abort();
     }
 

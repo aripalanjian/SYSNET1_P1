@@ -43,12 +43,10 @@ void Shell::run(){
         } else if (!params->getBackground()){
             pid = fork();
             if (pid == 0) {
-                std::cout << "Child Process\n";
                 checkParams(params);
                 break;
             } else {
                 wait(status); //change to waitpid so that new commands cannot be entered until child is done
-                std::cout << "Parent Process\n";
                 if (debug){
                     params->printParams();
                 }
@@ -56,11 +54,9 @@ void Shell::run(){
         } else {
             pid = fork();
             if (pid == 0) {
-                std::cout << "Child Process\n";
                 checkParams(params);
                 break;
             } else {
-                std::cout << "Parent Process\n";
                 if (debug){
                     params->printParams();
                 }
@@ -72,8 +68,7 @@ void Shell::run(){
         params->resetParams();
     }
 
-    wait(status);
-    std::cout << "Children should be terminated..." << endl;
+    wait(status); //wait for terminating children
 }
 
 int Shell::getInput(char **arr){
@@ -127,12 +122,7 @@ void Shell::checkParams(Param* params){
         if (inputRedirect != NULL){
             file = inputRedirect;
         } else {
-            file = NULL;
-            for(int i = 0; i < size - 1; i++){
-                if (option[i][0] != '-'){
-                    file = option[i];
-                }
-            }
+            file = option[0];
         }        
 
         freopen(file, "r", stdin);
